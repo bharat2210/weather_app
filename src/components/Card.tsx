@@ -5,11 +5,13 @@ type props={
     currentTemp:number;
     maxTemp:number;
      minTemp:number;
+     description:string | undefined
 
 }
 
 
-const Card = ({currentTemp,maxTemp,minTemp}:props) => {
+const Card = ({currentTemp,maxTemp,minTemp,description}:props) => {
+  console.log(currentTemp,maxTemp,minTemp)
   return (
     <>
     {/* <div className="cardm">
@@ -156,8 +158,8 @@ const Card = ({currentTemp,maxTemp,minTemp}:props) => {
             <div className="sun"></div>
         </section>
         <section className="content">
-            <h1>{currentTemp}&deg;</h1>
-            <h3>Partly Cloudy</h3>
+            <h1>{currentTemp}&deg;C</h1>
+            <h3 className='capitalize'>{description}</h3>
 
             <div className="details">
                 <div>

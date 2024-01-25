@@ -91,6 +91,7 @@ export default function Home() {
   const Currenttemperature=convertKelvintoCel(data?.main?.temp)
   const MinTemp=convertKelvintoCel(data?.main?.temp_min)
   const maxTemp=convertKelvintoCel(data?.main?.temp_max)
+  const description = data?.weather[0].description
 //  console.log("data",data)
  if(isLoading){
   
@@ -114,7 +115,7 @@ export default function Home() {
    </p>
       </h2>
       <div>
-      <Card currentTemp={Currenttemperature} minTemp={MinTemp} maxTemp={maxTemp}/>
+      <Card currentTemp={Currenttemperature} minTemp={MinTemp} maxTemp={maxTemp} description={description}/>
       </div>
     </div>
   </section>
