@@ -2,32 +2,271 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+/* .cardm {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 46.64%;
+    left: 50%;
   }
-}
-
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+  
+  .card {
+    position: absolute;
+    width: 500px;
+    height: 130px;
+    border-radius: 25px;
+    background: whitesmoke;
+    color: black;
+    z-index: 2;
+    transition: .4s ease-in-out;
   }
+  
+  .weather {
+    position: relative;
+    margin: 1em;
+  }
+  
+  .main {
+    font-size: 2em;
+    position: relative;
+    top: -3em;
+    left: 4.3em;
+  }
+  
+  .mainsub {
+    position: relative;
+    top: -10.2em;
+    left: 14em;
+    font-size: 0.6em;
+  }
+  
+  .card2 {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    width: 240px;
+    height: 130px;
+    border-radius: 35px;
+    background: white;
+    z-index: -1;
+    transition: .4s ease-in-out;
+  }
+  
+  .card:hover {
+    background-color: #FFE87C;
+    cursor: pointer;
+  }
+  
+  .card:hover + .card2 {
+    height: 300px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+  
+  .card:hover + .card2 .lower {
+    top: 20.2em;
+  }
+  
+  .upper {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    color: black;
+    left: 1.8em;
+    top: 0.5em;
+    gap: 4em;
+  }
+  
+  .humiditytext {
+    position: relative;
+    left: 3.6em;
+    top: 2.7em;
+    font-size: 0.6em;
+  }
+  
+  .airtext {
+    position: relative;
+    left: 3.8em;
+    top: 2.7em;
+    font-size: 0.6em;
+  }
+  
+  .lower {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    text-align: center;
+    color: black;
+    left: 3em;
+    top: 1em;
+    margin-top: 0.7em;
+    font-size: 0.7em;
+    transition: .4s ease-in-out;
+  }
+  
+  .aqi {
+    margin-right: 3.25em;
+  }
+  
+  .realfeel {
+    margin-right: 1.8em;
+  }
+  
+  .card3 {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 240px;
+    height: 30px;
+    top: 4.7em;
+    left: -2.4em;
+    font-size: 1.24em;
+    border-bottom-left-radius: 35px;
+    border-bottom-right-radius: 35px;
+    background: limegreen;
+    transition: .4s ease-in-out;
+  } */
+
+
+  @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400&display=swap');
+
+:root{
+    --background-gradient: linear-gradient(#56CCF2, #2F80ED, rgb(61, 0, 160));
+    --sky-blue: #D0F4FC;
+    --yellow: #FCE765;
 }
+
+/* *{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Josefin Sans', sans-serif;  
+} */
+
+/* body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background:honeydew;
+} */
+
+main{
+    height: 100%;
+    width: 600px;
+    background-image: url("https://img.freepik.com/free-vector/gorgeous-clouds-background-with-blue-sky-design_1017-25501.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+}
+
+.sky{
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.sky > div{
+    margin: 0 auto;
+    border-radius: 24px;
+}
+
+.cloud-1{
+    width: 100%;
+    height: 60px;
+    /* background: var(--sky-blue); */
+}
+
+.cloud-2{
+    width: 75%;
+    height: 55px;
+    background: white;
+    margin-top: -30px !important;
+}
+
+.cloud-3{
+    width: 60%;
+    height: 40px;
+    /* background: var(--sky-blue); */
+    margin-top: -15px !important;
+}
+
+.sun{
+    width: 90px;
+    height: 90px;
+    background: var(--yellow);
+    border-radius: 50% !important;
+    margin-top: -70px !important;
+}
+
+.content{
+    margin-top: 140px;
+    text-align: center;
+    color: white;
+}
+
+.content > h1{
+    font-size: 80px;
+    margin-left: 20px;
+}
+
+.content > h3{
+    font-size: 25px;
+    font-weight: 300;
+}
+
+.details{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    height: 100%;
+    margin-top: 16px;
+    font-weight: 300;
+    row-gap: 8px;
+    color: black;
+}
+
+.value{
+    font-size: 36px;
+}
+
+.label{
+    font-size: 14px;
+}
+
+
+.overlay {
+    display: block !important;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .loader {
+    border: 6px solid #f3f3f3; /* Light grey */
+    border-top: 6px solid #3498db; /* Blue */
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
