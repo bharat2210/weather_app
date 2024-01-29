@@ -1,10 +1,9 @@
-
-'use client'
+"use client";
 import Navbar from "@/components/Navbar";
 import { useQuery } from "react-query";
-import { format, parseISO } from 'date-fns';
+import { format, parseISO } from "date-fns";
 
-import axios from 'axios'
+import axios from "axios";
 import Card from "@/components/Card";
 import { convertKelvintoCel } from "@/utils/convertKelvintoCel";
 import { useAtom } from "jotai";
@@ -80,17 +79,17 @@ interface WeatherData {
 
 export default function Home() {
   const [place, setPlace] = useAtom(placeAtom);
-  const [lat,setLat]=useState<any>();
-  const[lon,setLon]=useState<any>();
-  const [loading,setLoading]=useState<boolean>(false)
+  const [lat, setLat] = useState<any>();
+  const [lon, setLon] = useState<any>();
+  const [loading, setLoading] = useState<boolean>(false);
   const { isLoading, error, data, refetch } = useQuery<WeatherData>(
     "repoData",
     async () => {
-      setLoading(true)
+      setLoading(true);
       const { data } = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?q=${place}&APPID=d75445a815f50f97bbc35c315b74fe54`
       );
-      setLoading(false)
+      setLoading(false);
       return data;
     }
   );
@@ -99,91 +98,77 @@ export default function Home() {
     refetch();
   }, [place, refetch]);
 
-  useLayoutEffect(()=>{
-  
+  useLayoutEffect(() => {
     if ("geolocation" in navigator) {
-     
-      navigator.geolocation.getCurrentPosition(function(position) {
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
-        
-        setLat(latitude)
-        setLon(longitude)
-      if(lat && lon){
-        const func=async()=>{
-          const response = await axios.get(`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=d75445a815f50f97bbc35c315b74fe54`) 
-   
-          console.log("response",response.data[0].name)
-          setPlace(response.data[0].name)
+      navigator.geolocation.getCurrentPosition(
+        function (position) {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
 
+          setLat(latitude);
+          setLon(longitude);
+          if (lat && lon) {
+            const func = async () => {
+              const response = await axios.get(
+                `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=d75445a815f50f97bbc35c315b74fe54`
+              );
+
+              // console.log("response", response.data[0].name);
+              setPlace(response.data[0].name);
+            };
+            func();
+          }
+        },
+        function (error) {
+          console.error("Error getting location:", error.message);
         }
-      func()
-      
-      
-      }
-         
-    
-      }, function(error) {
-        console.error("Error getting location:", error.message);
-      });
-    }else {
-  
+      );
+    } else {
       console.error("Geolocation is not supported by this browser.");
     }
-  
-  
-  
-  
-     
-    
-  
-  
-  
-  
-  },[lat, lon])
-
-
-
-
-
+  }, [lat, lon]);
 
   const currentDay = data?.dt;
-  const formattedDay = currentDay ? format(new Date(currentDay * 1000), "EEEE") : '';
-  const formattedDate = currentDay ? format(new Date(currentDay * 1000), "dd.MM.yyyy") : '';
-  const Currenttemperature=convertKelvintoCel(data?.main?.temp)
-  const MinTemp=convertKelvintoCel(data?.main?.temp_min)
-  const maxTemp=convertKelvintoCel(data?.main?.temp_max)
-  const description = data?.weather[0].description
- const city = data?.name
+  const formattedDay = currentDay
+    ? format(new Date(currentDay * 1000), "EEEE")
+    : "";
+  const formattedDate = currentDay
+    ? format(new Date(currentDay * 1000), "dd.MM.yyyy")
+    : "";
+  const Currenttemperature = convertKelvintoCel(data?.main?.temp);
+  const MinTemp = convertKelvintoCel(data?.main?.temp_min);
+  const maxTemp = convertKelvintoCel(data?.main?.temp_max);
+  const description = data?.weather[0].description;
+  const city = data?.name;
 
- console.log("data",data)
- if(loading){
-  
-  return <Loader/>
-  
-  
+  // console.log("data", data);
+  if (loading) {
+    return <Loader />;
   }
   return (
-     <div className="flex flex-col gap-4 bg-gray-100 min-h-screen">
-      <Navbar/>
+    <div className="flex flex-col gap-4 bg-gray-100 min-h-screen">
+      <Navbar />
       <main className="px-3 max-w-7xl mx-auto flex flex-col gap-9  w-full  pb-10 pt-4">
-  {/* current weather */}
-  <section>
-    <div>
-      <h2 className="flex gap-1 text-2xl  items-end ">
-   <p>
-    {formattedDay}
-   </p>
-   <p className="text-base">
-  ({formattedDate})
-   </p>
-      </h2>
-      <div>
-      <Card currentTemp={Currenttemperature} minTemp={MinTemp} maxTemp={maxTemp} description={description} city={city} isLoading={loading}/>
-      </div>
-    </div>
-  </section>
+        {/* current weather */}
+        <section>
+          <div>
+            <h2 className="flex gap-1 text-2xl  items-end ">
+              <p>{formattedDay}</p>
+              <p className="text-base">({formattedDate})</p>
+            </h2>
+            <div>
+              <Card
+                currentTemp={Currenttemperature}
+                minTemp={MinTemp}
+                maxTemp={maxTemp}
+                description={description}
+                city={city}
+                isLoading={loading}
+              />
+            </div>
+          </div>
+        </section>
       </main>
-     </div>
+    </div>
   );
 }

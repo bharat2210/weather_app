@@ -13,7 +13,7 @@ type props={
 
 
 const Card = ({currentTemp,maxTemp,minTemp,description,city,isLoading}:props) => {
-  console.log(currentTemp,maxTemp,minTemp)
+  // console.log(currentTemp,maxTemp,minTemp)
   return (
     <>
     {/* <div className="cardm">
