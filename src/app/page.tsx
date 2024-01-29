@@ -73,7 +73,7 @@ export default function Home() {
     "repoData",
     async () => {
       const { data } = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?q=${place}&APPID=${process.env.NEXT_WEATHER_API_KEY}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${place}&APPID=d75445a815f50f97bbc35c315b74fe54`
       );
       return data;
     }
