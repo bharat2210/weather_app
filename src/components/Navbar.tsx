@@ -19,7 +19,7 @@ const Navbar = () => {
     if (value.length >= 3) {
       try {
         const response = await axios.get(
-          `https://api.openweathermap.org/data/2.5/find?q=${value}&APPID=${process.env.NEXT_WEATHER_API_KEY}`
+          `https://api.openweathermap.org/data/2.5/find?q=${value}&APPID=d75445a815f50f97bbc35c315b74fe54`
         );
 
         const suggestion = response.data.list.map((item: any) => item?.name);
