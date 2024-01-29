@@ -50,11 +50,11 @@ const Navbar = () => {
       setLoadingCity(false);
     } else {
       setError("");
-      setTimeout(() => {
+
         setLoadingCity(false);
         setPlace(city);
         setShowSuggestions(false);
-      }, 500);
+      
     }
   }
 
