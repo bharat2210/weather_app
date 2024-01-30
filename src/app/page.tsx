@@ -22,6 +22,7 @@ import {
   geocode,
   RequestType,
 } from "react-geocode";
+import { convertMetertoKm } from "@/utils/convertMetertoKm";
 interface Coord {
   lon: number;
   lat: number;
@@ -110,7 +111,7 @@ export default function Home() {
           if (lat && lon) {
             const func = async () => {
               const response = await axios.get(
-                `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&APPID=d75445a815f50f97bbc35c315b74fe54`
+                `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&APPID=d75445a815f50f97bbc35c315b74fe54`
               );
 
               // console.log("response", response.data[0].name);
@@ -140,8 +141,10 @@ export default function Home() {
   const maxTemp = convertKelvintoCel(data?.main?.temp_max);
   const description = data?.weather[0].description;
   const city = data?.name;
+  const visibility=convertMetertoKm(data?.visibility)
+  const humidity= data?.main?.humidity
 
-  // console.log("data", data);
+  console.log("data", data);
   if (loading) {
     return <Loader />;
   }
@@ -164,6 +167,8 @@ export default function Home() {
                 description={description}
                 city={city}
                 isLoading={loading}
+                visibility={visibility}
+                humidity={humidity}
               />
             </div>
           </div>
