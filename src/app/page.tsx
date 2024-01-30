@@ -110,7 +110,7 @@ export default function Home() {
           if (lat && lon) {
             const func = async () => {
               const response = await axios.get(
-                `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=d75445a815f50f97bbc35c315b74fe54`
+                `http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&APPID=d75445a815f50f97bbc35c315b74fe54`
               );
 
               // console.log("response", response.data[0].name);
