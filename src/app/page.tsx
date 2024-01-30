@@ -83,6 +83,8 @@ export default function Home() {
   const [lat, setLat] = useState<any>();
   const [lon, setLon] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
+
+
   const { isLoading, error, data, refetch } = useQuery<WeatherData>(
     "repoData",
     async () => {
@@ -95,9 +97,13 @@ export default function Home() {
     }
   );
 
+
+
   useEffect(() => {
     refetch();
   }, [place, refetch]);
+
+
 
   useLayoutEffect(() => {
     if ("geolocation" in navigator) {
@@ -114,7 +120,6 @@ export default function Home() {
                 `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&APPID=d75445a815f50f97bbc35c315b74fe54`
               );
 
-              // console.log("response", response.data[0].name);
               setPlace(response.data[0].name);
             };
             func();
@@ -129,6 +134,9 @@ export default function Home() {
     }
   }, [lat, lon]);
 
+
+
+
   const currentDay = data?.dt;
   const formattedDay = currentDay
     ? format(new Date(currentDay * 1000), "EEEE")
@@ -141,10 +149,13 @@ export default function Home() {
   const maxTemp = convertKelvintoCel(data?.main?.temp_max);
   const description = data?.weather[0].description;
   const city = data?.name;
-  const visibility=convertMetertoKm(data?.visibility)
-  const humidity= data?.main?.humidity
+  const visibility = convertMetertoKm(data?.visibility);
+  const humidity = data?.main?.humidity;
 
-  console.log("data", data);
+  // console.log("data", data);
+
+
+
   if (loading) {
     return <Loader />;
   }
